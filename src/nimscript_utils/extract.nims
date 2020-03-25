@@ -18,3 +18,10 @@ proc extractZip*(file,outputDir: string) =
   let (output,err) = gorgeEx cmd
   if err != 0:
     raise newException(OSError, output)
+
+const 7zlink = "https://www.7-zip.org/a/7z1900-x64.exe"
+when defined(windows):
+  proc get7z(dir: string, proxy: Option[Proxy]) =
+    download(Config(url: 7zlink, proxy: proxy, outdir: dir, outfile: dir / "7z1900-x64.exe", overwrite: true))
+
+proc extractTarxz*(file,outputDir: string) = discard
