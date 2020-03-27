@@ -19,9 +19,13 @@ proc extractZip*(file,outputDir: string) =
   if err != 0:
     raise newException(OSError, output)
 
-const 7zlink = "https://www.7-zip.org/a/7z1900-x64.exe"
-when defined(windows):
-  proc get7z(dir: string, proxy: Option[Proxy]) =
-    download(Config(url: 7zlink, proxy: proxy, outdir: dir, outfile: dir / "7z1900-x64.exe", overwrite: true))
+const link7z* = "https://www.7-zip.org/a/7z1900-x64.exe"
+const exe7z* = "7za.exe"
 
-proc extractTarxz*(file,outputDir: string) = discard
+when defined(windows):
+  proc get7z*(dir: string, proxy: Option[Proxy]) =
+    download(Config(url: link7z, proxy: proxy, outdir: dir, outfile: dir / exe7z, overwrite: true))
+
+proc extractTarxz*(file,outputDir: string): string =
+  when defined(windows): staticExec(fmt"{7zexe} x {file} -aoa -o{outputDir}")
+  else: staticExec(fmt"tar --extract --file {file} --directory {outputDir} --overwrite")
