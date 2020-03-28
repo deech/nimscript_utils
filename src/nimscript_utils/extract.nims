@@ -28,4 +28,5 @@ when defined(windows):
 
 proc extractTarxz*(file,outputDir: string): string =
   when defined(windows): staticExec(fmt"{7zexe} x {file} -aoa -o{outputDir}")
+  when defined(macosx): staticExec(fmt"tar --extract --file {file} --directory {outputDir}")
   else: staticExec(fmt"tar --extract --file {file} --directory {outputDir} --overwrite")
