@@ -1,6 +1,6 @@
 import options,os
-import "downloader.nims"
-import "extract.nims"
+import downloader
+import extract
 
 const githubUrl = "https://github.com"
 

@@ -1,7 +1,7 @@
 import system, strformat
 when defined(windows):
   import options, os
-  import "./downloader.nims"
+  import downloader
 
 proc extractZip*(file,outputDir: string) =
   when not defined(windows):
