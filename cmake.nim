@@ -3,7 +3,7 @@ proc runCmake*(parent:string,flags: seq[string], buildDir :string = "build", pos
   let cmakeBuildDir = parent / buildDir
   if not (system.dirExists cmakeBuildDir):
     mkDir cmakeBuildDir
-    withDir cmakeBuildDir:
-      exec ("cmake .. " & join(flags, " "))
-      for command in post:
-        exec command
+  withDir cmakeBuildDir:
+    exec ("cmake .. " & join(flags, " "))
+    for command in post:
+      exec command
