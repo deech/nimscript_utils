@@ -9,8 +9,8 @@ proc downloadGithubCommit*(user: string, project: string, commit: string, outdir
     zipUrl = githubUrl & "/" & user & "/" & project & "/" & "/archive/" & commit & ".zip"
     zipDir = project & "-" & commit
     zipFile = zipDir & ".zip"
-  if (not system.existsDir(outDir / zipDir)):
-    if (not system.existsFile(os.getTempDir() / zipFile)) or overwrite:
+  if (not system.dirExists(outDir / zipDir)):
+    if (not system.fileExists(os.getTempDir() / zipFile)) or overwrite:
        download Config(
          url: zipUrl,
          proxy: proxy,

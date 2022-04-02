@@ -60,11 +60,11 @@ proc download*(c: Config) =
     if system.findExe("curl") == "":
       err("'curl' is required.")
   let (dir,f) = os.splitPath c.outFile
-  if (not system.existsDir dir):
+  if (not system.dirExists dir):
     err("The output directory: " & dir & " does not exist.")
   if f == "":
     err("No output file name specified.")
-  if (system.existsFile(c.outfile) and not c.overwrite):
+  if (system.fileExists(c.outfile) and not c.overwrite):
     err("The output file exists and cannot be overwritten.")
   let userAgent = "downloader/" & nimscript.version & "(" & nimscript.buildOS & ";" & nimscript.buildCPU & ")"
   let downloadScript =

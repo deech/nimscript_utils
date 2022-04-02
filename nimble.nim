@@ -12,4 +12,4 @@ proc getNimbleDir*():string =
     if nimbleDir != "" : result = nimbleDir
     else:
       let x = getHomeDir() / ".nimble"
-      if system.existsDir x: result = x
+      if system.dirExists x: result = x
